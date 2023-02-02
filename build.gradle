@@ -1,0 +1,35 @@
+buildscript {
+    ext {//전역변수 설정 for build.gradle
+        //variable springBootVersion
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {// 어느 저장소에서 받을까
+        mavenCentral() // 예전에 많이 사용. 업로드 불편함
+        jcenter() //새로 생김. 업로드 개선+mavenCentral에 동시 업로드 가능
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {//필요한 라이브러리들, 버전을 명시하지 않으면, 위의 springBootVersion를 따라감
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+test {
+    useJUnitPlatform()
+}
